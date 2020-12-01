@@ -14,5 +14,16 @@ namespace DamePizzu
         {
             InitializeComponent();
         }
+
+        void GoToCart(System.Object sender, System.EventArgs e)
+        {
+            Command GoToCartCommand = new Command(RedirectToCart);
+            GoToCartCommand.Execute(null);
+        }
+
+        async void RedirectToCart()
+        {
+            await Shell.Current.GoToAsync("//Cart");
+        }
     }
 }

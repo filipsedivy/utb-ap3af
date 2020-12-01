@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:DamePizzu"
+       xmlns:helpers="clr-namespace:DamePizzu.Helpers"
+       x:Class="DamePizzu.AppShell">
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Color x:Key="NavigationPrimary">#2196F3</Color>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource NavigationPrimary}" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.DisabledColor" Value="#FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+            </Style>
+            <Style TargetType="ShellItem" BasedOn="{StaticResource BaseStyle}" />
+            <Style x:Key="MyShell" TargetType="ShellItem" BasedOn="{StaticResource BaseStyle}" />
+            <OnPlatform x:Key="MaterialFontFamily" x:TypeArguments="x:String">
+                <On Platform="Android" Value="materialdesignicons-webfont.ttf#Material Design Icons" />
+            </OnPlatform>
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid BackgroundColor="#2196F3">
+                <Label Margin="30" FontSize="Large" TextColor="White">Dáme Pizzu</Label>
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+
+     <ShellContent
+            Style="{StaticResource MyShell}"
+            Title="Domovská stránka"
+            ContentTemplate="{DataTemplate views:MainPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="{StaticResource MaterialFontFamily}"
+                Glyph="{x:Static helpers:IconFont.Pizza}"
+                Color="Orange"
+                Size="24">
+            </FontImageSource>
+        </ShellContent.Icon>
+    </ShellContent>
+
+    <ShellContent
+            Style="{StaticResource MyShell}"
+            Title="Košík"
+            ContentTemplate="{DataTemplate views:CartPage}"
+            Route="Cart">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="{StaticResource MaterialFontFamily}"
+                Glyph="{x:Static helpers:IconFont.BasketOutline}"
+                Color="Red"
+                Size="24">
+            </FontImageSource>
+        </ShellContent.Icon>
+    </ShellContent>
+
+    <ShellContent
+            Style="{StaticResource MyShell}"
+            Title="Seznam objednávek"
+            ContentTemplate="{DataTemplate views:OrdersPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="{StaticResource MaterialFontFamily}"
+                Glyph="{x:Static helpers:IconFont.FormatListCheckbox}"
+                Color="Blue"
+                Size="24">
+            </FontImageSource>
+        </ShellContent.Icon>
+    </ShellContent>
+</Shell>

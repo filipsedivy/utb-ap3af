@@ -1,24 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:DamePizzu.Helpers"
              x:Class="DamePizzu.MainPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:Key="MaterialFontFamily" x:TypeArguments="x:String">
+                <On Platform="Android" Value="materialdesignicons-webfont.ttf#Material Design Icons" />
+            </OnPlatform>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
-    <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at "/>
-                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
-    </StackLayout>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="GoToCart">
+            <ToolbarItem.IconImageSource>
+                 <FontImageSource Glyph="{x:Static helpers:IconFont.BasketOutline}" FontFamily="{StaticResource MaterialFontFamily}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ImageButton Source="{FontImage FontFamily={StaticResource MaterialFontFamily}, Glyph={x:Static helpers:IconFont.Youtube}, Color=DarkRed,Size=44}"/>
+
+            <Image
+                Grid.Column="2"
+                HeightRequest="44"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="44">
+                <Image.Source>
+                    <FontImageSource
+                        FontFamily="{StaticResource MaterialFontFamily}"
+                        Glyph="{x:Static helpers:IconFont.Youtube}"
+                        Size="44"
+                        Color="Blue" />
+                </Image.Source>
+            </Image>
+
+            <Label Text="{x:Static helpers:IconFont.PlayBox}" FontSize="50" TextColor="Orange" FontFamily="{StaticResource MaterialFontFamily}" HorizontalOptions="Center" />
+        </StackLayout>
+    </ContentPage.Content>
 
 </ContentPage>
