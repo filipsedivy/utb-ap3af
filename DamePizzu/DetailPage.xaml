@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DamePizzu.DetailPage">
+    <Grid Padding="30" BackgroundColor="Black" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ScrollView Grid.Row="1" HorizontalOptions="FillAndExpand">
+            <Grid RowSpacing="50" HorizontalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackLayout Spacing="0" HorizontalOptions="Center" VerticalOptions="Start">
+                    <Label Text="{Binding SelectedFood.Name}" TextColor="#F9B522" 
+                           FontFamily="ThemeFont" FontSize="50" HorizontalOptions="Center"/>
+                    <Label Text="{Binding SelectedFood.Price, StringFormat='{0} Kč'}" TextColor="White" Opacity="0.75" FontFamily="LightFont" FontSize="19" 
+                           HorizontalOptions="Center"/>
+                </StackLayout>
+                <CarouselView Grid.Row="1" ItemsSource="{Binding Foods}" HeightRequest="260" HorizontalOptions="FillAndExpand" 
+                          CurrentItem="{Binding SelectedFood}" IsScrollAnimated="True" IsSwipeEnabled="True">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalOptions="FillAndExpand">
+                                <Image Source="{Binding Image}" Aspect="Fill" Margin="0,-50,0,0" HeightRequest="210" 
+                                       WidthRequest="235" HorizontalOptions="Center" VerticalOptions="End"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+                <ImageButton Grid.Row="1" Source="left.png" Margin="15,50,0,0" Aspect="Fill" HeightRequest="18" WidthRequest="18" HorizontalOptions="Start" 
+                         VerticalOptions="Center" BackgroundColor="Transparent" Command="{Binding ChangePositionCommand}" CommandParameter="L"/>
+                <ImageButton Grid.Row="1" Source="right.png" Margin="0,50,15,0" Aspect="Fill" HeightRequest="18" WidthRequest="18" HorizontalOptions="End" 
+                         VerticalOptions="Center" BackgroundColor="Transparent" Command="{Binding ChangePositionCommand}" CommandParameter="R"/>
+                <StackLayout Grid.Row="2" Spacing="20" HorizontalOptions="FillAndExpand">
+                    <BoxView BackgroundColor="#F9B522" HeightRequest="2" WidthRequest="45" VerticalOptions="Start" 
+                             HorizontalOptions="End"/>
+                    <Label Text="{Binding SelectedFood.Description}" TextColor="White"
+                           FontFamily="LightFont" FontSize="12" HorizontalOptions="End" HorizontalTextAlignment="End"/>
+                    
+                    <Button Text="Objednat" TextColor="Black" Padding="20,5" CornerRadius="17" 
+                            BackgroundColor="#F9B522" FontFamily="ThemeFont" HorizontalOptions="End"/>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>
