@@ -1,23 +1,18 @@
 ﻿using System;
-using SQLite;
+using System.Collections.Generic;
 
 namespace DamePizzu.Model
 {
     public class Order
     {
-        public Order()
-        {
-            Created = DateTime.Now;
-            Delivered = null;
-        }
-
-        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
         public decimal TotalPrice { get; set; }
 
-        public DateTime Created { get; set; }
+        public DateTime Created { get; set; } = DateTime.Now;
 
-        public DateTime? Delivered { get; set; }
+        public bool Favourite { get; set; } = false;
+
+        public List<OrderAccessories> OrderAccessories { get; set; } = new List<OrderAccessories>();
     }
 }
