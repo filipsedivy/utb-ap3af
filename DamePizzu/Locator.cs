@@ -1,5 +1,4 @@
 ﻿using System;
-using DamePizzu.Data;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DamePizzu
@@ -11,11 +10,11 @@ namespace DamePizzu
         public static void Initalize()
         {
             var services = new ServiceCollection();
-            services.AddSingleton<IOrderRepository, SqliteOrderRepository>();
             services.AddTransient<MainPage>();
             services.AddTransient<OrdersPage>();
             services.AddTransient<CartPage>();
             services.AddTransient<DetailPage>();
+            services.AddTransient<OrderPage>();
 
             serviceProvider = services.BuildServiceProvider();
         }

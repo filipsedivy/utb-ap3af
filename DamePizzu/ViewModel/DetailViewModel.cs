@@ -56,6 +56,20 @@ namespace DamePizzu.ViewModel
             }
         }
 
+        public ICommand OrderCommand => new Command(DisplayOrder);
+
+        private void DisplayOrder()
+        {
+            if (selectedFood != null)
+            {
+                var viewModel = new OrderViewModel { SelectedFood = selectedFood };
+                var orderPage = new OrderPage { BindingContext = viewModel };
+
+                var navigation = Application.Current.MainPage.Navigation;
+                _ = navigation.PushAsync(orderPage, true);
+            }
+        }
+
         public ICommand ChangePositionCommand => new Command(ChangePosition);
 
         private void ChangePosition(object obj)

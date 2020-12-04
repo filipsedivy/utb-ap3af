@@ -5,9 +5,9 @@ namespace DamePizzu.Model
 {
     public class Order
     {
-        public int Id { get; set; }
+        public string Food { get; set; }
 
-        public decimal TotalPrice { get; set; }
+        public double TotalPrice { get; set; }
 
         public DateTime Created { get; set; } = DateTime.Now;
 

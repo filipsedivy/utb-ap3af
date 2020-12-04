@@ -40,7 +40,8 @@
                            FontFamily="LightFont" FontSize="12" HorizontalOptions="End" HorizontalTextAlignment="End"/>
                     
                     <Button Text="Objednat" TextColor="Black" Padding="20,5" CornerRadius="17" 
-                            BackgroundColor="#F9B522" FontFamily="ThemeFont" HorizontalOptions="End"/>
+                            BackgroundColor="#F9B522" FontFamily="ThemeFont" HorizontalOptions="FillAndExpand"
+                            Command="{Binding OrderCommand}" />
                 </StackLayout>
             </Grid>
         </ScrollView>

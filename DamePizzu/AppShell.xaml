@@ -51,21 +51,6 @@
 
     <ShellContent
             Style="{StaticResource MyShell}"
-            Title="Košík"
-            ContentTemplate="{DataTemplate views:CartPage}"
-            Route="Cart">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="{StaticResource MaterialFontFamily}"
-                Glyph="{x:Static helpers:IconFont.BasketOutline}"
-                Color="Red"
-                Size="24">
-            </FontImageSource>
-        </ShellContent.Icon>
-    </ShellContent>
-
-    <ShellContent
-            Style="{StaticResource MyShell}"
             Title="Seznam objednávek"
             ContentTemplate="{DataTemplate views:OrdersPage}">
         <ShellContent.Icon>
