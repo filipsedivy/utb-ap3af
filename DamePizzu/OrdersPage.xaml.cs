@@ -36,6 +36,7 @@ namespace DamePizzu
                     DisplayAlert("Objednávka", $"Objednávka {o.Food} byla přidána do oblíbených", "Děkuji");
                 }
 
+                // NeedFix
                 var bc = BindingContext as OrdersViewModel;
                 bc.ReloadOrders();
             });
