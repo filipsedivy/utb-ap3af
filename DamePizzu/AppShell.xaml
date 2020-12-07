@@ -38,7 +38,8 @@
      <ShellContent
             Style="{StaticResource MyShell}"
             Title="Domovská stránka"
-            ContentTemplate="{DataTemplate views:MainPage}">
+            ContentTemplate="{DataTemplate views:MainPage}"
+            Route="Home">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="{StaticResource MaterialFontFamily}"
@@ -52,7 +53,8 @@
     <ShellContent
             Style="{StaticResource MyShell}"
             Title="Seznam objednávek"
-            ContentTemplate="{DataTemplate views:OrdersPage}">
+            ContentTemplate="{DataTemplate views:OrdersPage}"
+            Route="ListOrders">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="{StaticResource MaterialFontFamily}"

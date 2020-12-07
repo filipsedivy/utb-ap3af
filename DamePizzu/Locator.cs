@@ -12,7 +12,6 @@ namespace DamePizzu
             var services = new ServiceCollection();
             services.AddTransient<MainPage>();
             services.AddTransient<OrdersPage>();
-            services.AddTransient<CartPage>();
             services.AddTransient<DetailPage>();
             services.AddTransient<OrderPage>();
 

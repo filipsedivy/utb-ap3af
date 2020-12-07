@@ -1,5 +1,94 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DamePizzu.OrdersPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:DamePizzu.ViewModel"
+             xmlns:helpers="clr-namespace:DamePizzu.Helpers"
+             xmlns:convertor="clr-namespace:DamePizzu.Convertor"
+             x:Class="DamePizzu.OrdersPage"
+             x:Name="OrdersPageView">
+
+    <ContentPage.BindingContext>
+        <vm:OrdersViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="true">#ffddbc21</Color>
+            <Color x:Key="false">#3CB371</Color>
+            <OnPlatform x:Key="MaterialFontFamily" x:TypeArguments="x:String">
+                <On Platform="Android" Value="materialdesignicons-webfont.ttf#Material Design Icons" />
+            </OnPlatform>
+            <convertor:FavoriteToColorConverter x:Key="FavoriteToColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Spacing="0" HorizontalOptions="Center" VerticalOptions="Center" Padding="10">
+                <Label Text="Seznam objednávek" TextColor="Black" FontFamily="ThemeFont" FontSize="20" HorizontalOptions="Center"/>
+            </StackLayout>
+            <RefreshView IsRefreshing="{Binding IsRefreshing}"
+             Command="{Binding RefreshCommand}">
+            <CollectionView ItemsSource="{Binding Orders}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems Mode="Reveal">
+                                    <SwipeItem Command="{Binding Path=BindingContext.FavoriteCommand, Source={x:Reference Name=OrdersPageView}}"
+                                               CommandParameter="{Binding .}"
+                                               IconImageSource="star.png"
+                                               BackgroundColor="LightGreen"
+                                               Text="Oblíbené"/>
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+
+                            <StackLayout Padding="10">
+                            <Frame HasShadow="False" BorderColor="Black" CornerRadius="5" BackgroundColor="{Binding Favourite, Converter={StaticResource FavoriteToColorConverter}}">
+                                <StackLayout>
+                                    <Label Text="{Binding Food}" FontSize="20"/>
+                                    <Label Text="{Binding TotalPrice, StringFormat='Částka: {0} Kč'}"/>
+                                    <Label Text="{Binding Created, StringFormat='Vytvořeno: {0:dd.mm.yyyy hh:mm}'}"/>
+                                    <Label Text="Doplňky:" />
+
+                                    <CollectionView ItemsSource="{Binding OrderAccessories}" HeightRequest="160">
+                                        <CollectionView.ItemsLayout>
+                                            <GridItemsLayout Orientation="Vertical" Span="1"/>
+                                        </CollectionView.ItemsLayout>
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Padding="10,0,0,0">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto"/>
+                                                        <RowDefinition Height="*"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Label Text="{Binding Name}" Grid.Column="0"/>
+                                                    <Label Text="{Binding Quantity, StringFormat='{0} ks'}" Grid.Column="1"/>
+                                                    <Label Text="{Binding TotalPrice, StringFormat='{0} Kč'}" Grid.Column="2"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+
+                                        <CollectionView.EmptyView>
+                                            <StackLayout Padding="10,0,0,0">
+                                                <Label Text="Objednávka bez doplňků" TextColor="Red"/>
+                                            </StackLayout>
+                                        </CollectionView.EmptyView>
+                                    </CollectionView>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <StackLayout>
+                        <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
+                               Text="Žádné existující objednávky"/>
+                    </StackLayout>
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </RefreshView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

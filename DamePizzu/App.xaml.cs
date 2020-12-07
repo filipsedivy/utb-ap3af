@@ -12,6 +12,10 @@ namespace DamePizzu
 
             Locator.Initalize();
 
+            Device.SetFlags(new[] {
+                "SwipeView_Experimental"
+            });
+
             MainPage = new AppShell();
         }
 

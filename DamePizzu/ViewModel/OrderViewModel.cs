@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using DamePizzu.Model;
 using DamePizzu.Services;
@@ -32,11 +33,16 @@ namespace DamePizzu.ViewModel
 
                 if (finish)
                 {
-                    var newOrderAccessories = new List<OrderAccessories>();
+                    var newOrder = new Order {
+                        TotalPrice = totalPrice,
+                        Food = selectedFood.Name,
+                        OrderAccessories = new List<OrderAccessories>()
+                    };
 
-                    foreach (var item in FoodAccessories)
+                    foreach (var item in FoodAccessories.Where(a => a.Quantity > 0))
                     {
-                        newOrderAccessories.Add(new OrderAccessories {
+                        newOrder.OrderAccessories.Add(new OrderAccessories
+                        {
                             Name = item.Name,
                             Quantity = item.Quantity,
                             PriceOneItem = item.Price,
@@ -44,16 +50,11 @@ namespace DamePizzu.ViewModel
                         });
                     }
 
-                    var newOrder = new Order{
-                        TotalPrice = totalPrice,
-                        Food = selectedFood.Name,
-                        OrderAccessories = newOrderAccessories
-                    };
-
                     using (var orderContext = new OrderContext())
                     {
-                        await orderContext.Orders.AddAsync(newOrder);
-                        await Shell.Current.DisplayAlert("Objednávka byla dokončena", "Děkujeme za objednávku", "OK", "Cancel");
+                        orderContext.Orders.Add(newOrder);
+                        orderContext.SaveChanges();
+                        await Shell.Current.GoToAsync("//Home");
                     }
                 }
             });

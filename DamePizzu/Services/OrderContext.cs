@@ -8,8 +8,8 @@ namespace DamePizzu.Services
 {
     public class OrderContext : DbContext
     {
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderAccessories> OrderAccessories { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderAccessories> OrderAccessories { get; set; }
 
         public OrderContext()
         {
@@ -23,6 +23,14 @@ namespace DamePizzu.Services
 
             optionsBuilder
                 .UseSqlite($"Filename={dbPath}");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<OrderAccessories>()
+                .HasOne(o => o.Order)
+                .WithMany(a => a.OrderAccessories)
+                .HasForeignKey(o => o.OrderId);
         }
     }
 }
